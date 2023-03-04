@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { SafeAreaView, StatusBar, StyleSheet, View, Text, Button, Image, TouchableOpacity, MaterialIcons, TouchableHighlight, Linking } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps"
-//import location from "./Main"
+import FABMenu from "./FABmenu"
 import Geolocation from "react-native-geolocation-service" // 👈
 import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions"
+import { FAB, Portal, Provider } from 'react-native-paper';
 
 export default function Page({ navigation }) {
     const loadPage = () => {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { StyleSheet, TextInput, Button, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { gStyle } from './styles/style';
+import { Button, Card, Provider as PaperProvider, TextInput } from 'react-native-paper';
 export const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('') // 👈
     const [password, setPassword] = useState('') // 👈
@@ -18,20 +19,31 @@ export const LoginScreen = ({ navigation }) => {
         }).then(response => { if (response.status == '200') { navigation.navigate('MainName'); } else { console.log(response.status) } });
     }
     return (
-        <View>
-            <TextInput
-                label='Логин'
-                onChangeText={setEmail}
-            />
-            <TextInput
-                label='Пароль'
-                secureTextEntry={true}
-                onChangeText={setPassword}
-            />
-            <Button title='Забыли логин или пароль?' />
-            <Button title='Войти' onPress={ffunc} />
-            <Button title='Зарегистрироваться' onPress={() => navigation.navigate('Registr')} />
-        </View>
+        <View style={gStyle.loginStyle}>
+            <Card style={gStyle.loginCard}>
+                <Card.Title title='Скоро буду!' />
+                <Card.Content>
+                    <TextInput
+                        label='Логин'
+                        onChangeText={setEmail}
+                    />
+                    <TextInput
+                        label='Пароль'
+                        secureTextEntry={true}
+                        onChangeText={setPassword}
+                    />
+                    <Button style={gStyle.loginCardButton}>
+                        Забыли логин или пароль?
+                    </Button>
+                    <Button style={gStyle.loginCardButton} onPress={ffunc} >
+                        Войти
+                    </Button>
+                    <Button style={gStyle.loginCardButton} onPress={() => navigation.navigate('Registr')} >
+                        Зарегестрироваться
+                    </Button>
+                </Card.Content>
+            </Card>
+        </View >
     );
 }
 

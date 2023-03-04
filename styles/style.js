@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import { DefaultTheme } from 'react-native-paper'
 
 export const gStyle = StyleSheet.create({
     /*
@@ -70,18 +71,11 @@ export const gStyle = StyleSheet.create({
     },
 
 })
-const styles = StyleSheet.create({
-    body: {
-        backgroundColor: 'black',
-    },
-    input: {
-        height: 40,
-        marginBottom: 10,
-        backgroundColor: '#fff',
-    },
-});
+
 export const theme = {
+    ...DefaultTheme,
     colors: {
+        ...DefaultTheme.colors,
         primary: 'purple',
         background: 'transparent'
     }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { Button, StyleSheet, TextInput, SafeAreaView, Alert, ScrollView, View } from "react-native";
+import { StyleSheet, SafeAreaView, Alert, ScrollView, View } from "react-native";
 import { gStyle } from './styles/style';
+import { Button, TextInput } from "react-native-paper";
+
 
 export const Registr = ({ navigation }) => {
     const [username, setUsername] = useState('') // 👈
@@ -26,24 +28,30 @@ export const Registr = ({ navigation }) => {
         }
     }
     return (
-        <SafeAreaView style={styles.body}>
-            <ScrollView style={styles.body}>
-                <View>
-                    <TextInput label='Имя' style={styles.input} onChangeText={setUsername} />
-                    <TextInput label='Email' style={styles.input} keyboardType='email-address' onChangeText={setEmail} />
+        <SafeAreaView>
+            <ScrollView>
+                <View style={gStyle.registrationContent}>
+                    <TextInput label='Имя' onChangeText={setUsername} />
+                    <TextInput label='Email' keyboardType='email-address' onChangeText={setEmail} />
                     <TextInput
                         label='Пароль'
                         secureTextEntry={true}
-                        style={styles.input}
                         onChangeText={setPassword}
+                        right={
+                            <TextInput.Icon icon='eye-off-outline' />
+                        }
                     />
                     <TextInput
                         label='Повторите пароль'
                         secureTextEntry={true}
-                        style={styles.input}
                         onChangeText={setPassword_correct}
+                        right={
+                            <TextInput.Icon icon='eye-off-outline' />
+                        }
                     />
-                    <Button title='Регистрация' onPress={ffunc} />
+                    <Button title='Регистрация' style={gStyle.registrationButton} onPress={ffunc} >
+                        Регистрация
+                    </Button>
                 </View>
             </ScrollView>
         </SafeAreaView>
