@@ -5,10 +5,40 @@ import FABMenu from "./FABmenu"
 import Geolocation from "react-native-geolocation-service" // 👈
 import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions"
 import { FAB, Portal, Provider } from 'react-native-paper';
+import PopupPage from './PopupPage';
+import FriendList from './Friends_list';
 
-export default function Page({ navigation }) {
+export const Page = ({ route, navigation }) => {
+    const { acctkn, rfrtkn } = route.params;
+    console.log(acctkn)
+    const [isPopupVisible, setPopupVisible] = useState(false);
+
+    const openPopup = () => {
+        setPopupVisible(true);
+    };
+
+    const closePopup = () => {
+        setPopupVisible(false);
+    };
+    const ChatsPage = () => {
+        navigation.navigate('ChatList', { acctkn: acctkn, rfrtkn: rfrtkn });
+    };
     const loadPage = () => {
         navigation.navigate('MainName');
+    }
+    const console_friends = async () => {
+        const response = await fetch('http://192.168.1.134:8080/api/v1/user/friends', {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + acctkn,
+            },
+        })
+        const resp = await response.json()
+        const rr = resp[0].id
+        //}).then(response => response.json()).then(response => { resp = response })
+        console.log(rr)
     }
     const [location, setLocation] = useState(null) // 👈
     const mapViewRef = useRef(null);
@@ -97,6 +127,27 @@ export default function Page({ navigation }) {
                 </MapView>
 
             )}
+            <View
+                style={{
+                    position: 'absolute',//use absolute position to show button on top of the map
+                    top: '10%', //for center align
+                    right: '10%',
+                    alignSelf: 'flex-end' //for align to right
+                }}
+            ><TouchableHighlight style={styles.but} onPress={ChatsPage}>
+                    <Image source={require('./chatimage.png')} style={{ height: 35, width: 35 }} />
+                </TouchableHighlight>
+            </View>
+            <TouchableHighlight style={styles.but} onPress={openPopup}>
+                <Image source={require('./frined_marker_image.png')} style={{ height: 35, width: 35 }} />
+            </TouchableHighlight>
+            <Button title="console log" onPress={console_friends}>console</Button>
+            <PopupPage visible={isPopupVisible} onCloseRequest={closePopup}>
+                <Button title="Open Popup" onPress={closePopup}>Открыть</Button>
+                <Button title="console log" onPress={console_friends}>console</Button>
+                <FriendList acctkn={acctkn} />
+            </PopupPage>
+
             {/* <View
                 style={{
                     position: 'absolute',//use absolute position to show button on top of the map
@@ -134,3 +185,4 @@ const styles = StyleSheet.create({
     },
 
 });
+export default Page;

@@ -4,11 +4,18 @@ import { gStyle } from './styles/style';
 import { Button, TextInput } from "react-native-paper";
 
 
-export const Registr = ({ navigation }) => {
+export const Registr = ({ route, navigation }) => {
+
+    const { acctkn, rfrtkn } = route.params;
+    const [zavupa, setZavupa] = useState(acctkn) // 👈
     const [username, setUsername] = useState('') // 👈
     const [email, setEmail] = useState('') // 👈
     const [password, setPassword] = useState('') // 👈
     const [password_correct, setPassword_correct] = useState('') // 👈
+    const log1 = () => {
+        console.log("accc: " + acctkn)
+        console.log("accc: " + rfrtkn)
+    }
     const ffunc = () => {
         if (password != password_correct) {
             Alert.alert('Пароли не совпадают', 'Ошибка', [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
@@ -51,6 +58,9 @@ export const Registr = ({ navigation }) => {
                     />
                     <Button title='Регистрация' style={gStyle.registrationButton} onPress={ffunc} >
                         Регистрация
+                    </Button>
+                    <Button title='Регистрация' style={gStyle.registrationButton} onPress={log1} >
+                        log
                     </Button>
                 </View>
             </ScrollView>

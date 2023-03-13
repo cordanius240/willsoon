@@ -5,11 +5,15 @@ import Registr from './navigate'
 import LoginScreen from './Loginpage';
 import RegistrationScreen from './examplepp'
 import PopupPageExample from './examplepp';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import ChatList from './ChatList';
 
 export default function App() {
 
   return (
-    <Registr />
+    <SafeAreaProvider>
+      <Registr />
+    </SafeAreaProvider>
   );
 }
 

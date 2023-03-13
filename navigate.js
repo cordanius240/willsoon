@@ -4,7 +4,8 @@ import Page from './Page';
 import Denied from './Denied';
 import Registr from './Registr';
 import LoginScreen from './Loginpage';
-
+import ChatList from './ChatList';
+import ChatPage from './ChatPage';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -17,6 +18,17 @@ export default function Navigate() {
                 name='LoginScreen'
                 component={LoginScreen}
                 options={{ title: 'Вход' }}
+                initialParams={{ acctkn: '', rfrtkn: '' }}
+            />
+            <Stack.Screen
+                name='ChatPage'
+                component={ChatPage}
+                options={{ title: 'Чат' }}
+            />
+            <Stack.Screen
+                name='ChatList'
+                component={ChatList}
+                options={{ title: 'Сообщения' }}
             />
             <Stack.Screen
                 name='Registr'
@@ -27,6 +39,7 @@ export default function Navigate() {
                 name='MainName'
                 component={Main}
                 options={{ title: 'Главная' }}
+                initialParams={{ acctkn: '', rfrtkn: '' }}
             />
             <Stack.Screen
                 name='PageName'

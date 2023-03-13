@@ -162,13 +162,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   prepopup: {
-    width: '30%',
-    height: '99%',
+    width: '100%',
+    height: '90%',
     backgroundColor: '#fff',
     borderRadius: 20,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     padding: 0,
+    top: '5%',
     overflow: 'hidden',
   },
   blackStrip: {
