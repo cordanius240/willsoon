@@ -7,11 +7,13 @@ import {
     Text,
     TouchableOpacity
 } from 'react-native';
-
-const Chat = ({ id, name, online, lastMessage, time, imgUri, navigation }) => {
+var userID = '';
+const Chat = ({ id, name, online, lastMessage, time, imgUri, recipientId, navigation, route }) => {
     const MessageLen = 25;
+    const { acctkn, rfrtkn } = route.params;
     function OpenChat(key) {
-        navigation.navigate('ChatPage');
+        console.log(userID);
+        navigation.navigate('ChatPage', { id: key, userId: userID, recipientId: recipientId, acctkn: acctkn, rfrtkn: rfrtkn });
     }
 
 
@@ -45,6 +47,11 @@ const ChatList = ({ numChats, navigation, route }) => {
                 },
             })
             const resp = await response.json()
+            if (resp[0].lastMessage.senderId === resp[0].recipientId) {
+                userID = resp[0].lastMessage.recipientId
+            } else {
+                userID = resp[0].lastMessage.senderId
+            }
             setChats(resp.slice(0, numChats));
         }
         FetchChats();
@@ -55,13 +62,15 @@ const ChatList = ({ numChats, navigation, route }) => {
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 {chats.map((chat) => (
                     <Chat
-                        id={chat.recipientId}
+                        id={chat.chatId}
                         name={chat.recipientUsername}
                         online={chat.online}
                         lastMessage={chat.lastMessage.text}
                         time={chat.lastMessage.sendAtTime}
                         imgUri={'https://sun9-22.userapi.com/impf/c855028/v855028839/cf38b/TOQ5sQ175mw.jpg?size=1620x2160&quality=96&sign=237f0e326daf7805f5f37b3417730b5d&type=album'}
+                        recipientId={chat.recipientId}
                         navigation={navigation}
+                        route={route}
                     />
                 ))}
             </ScrollView>

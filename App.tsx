@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text, Button } from 'react-native';
 import MainStack from './navigate'
 import Registr from './navigate'
-import LoginScreen from './Loginpage';
+import LoginScreen from './luba';
 import RegistrationScreen from './examplepp'
 import PopupPageExample from './examplepp';
 import { SafeAreaProvider } from 'react-native-safe-area-context';

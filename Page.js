@@ -4,7 +4,6 @@ import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps"
 import FABMenu from "./FABmenu"
 import Geolocation from "react-native-geolocation-service" // 👈
 import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions"
-import { FAB, Portal, Provider } from 'react-native-paper';
 import PopupPage from './PopupPage';
 import FriendList from './Friends_list';
 
